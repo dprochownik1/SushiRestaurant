@@ -1,7 +1,17 @@
+using Sushi.Web;
+using Sushi.Web.Services;
+using Sushi.Web.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IDishService, DishService>();
+StaticDetails.DishApiBase = builder.Configuration["ServiceUrls:DishApi"];
+
+builder.Services.AddScoped<IDishService, DishService>();
+
 
 var app = builder.Build();
 
@@ -13,7 +23,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); 
 app.UseStaticFiles();
 
 app.UseRouting();
