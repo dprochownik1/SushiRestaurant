@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Sushi.Services.DishAPI;
 using Sushi.Services.DishAPI.Models;
+using Sushi.Services.DishAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 IMapper mapper = ApplicationMappingProfile.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+builder.Services.AddScoped<IDishRepository, DishRepository>();
 
 var app = builder.Build();
 

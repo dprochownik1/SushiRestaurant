@@ -6,7 +6,8 @@ namespace Sushi.Services.DishAPI.Repository
     {
         Task<IEnumerable<DishDto>> GetDishes();
         Task<DishDto> GetDishById(int dishId);
-        Task<DishDto> CreateUpdateDish(DishDto dishDto);
+        Task<DishDto> CreateDish(DishDto dishDto);
+        Task<DishDto> UpdateDish(DishDto dishDto);
         Task<bool> DeleteDish(int dishId);
     }
 }
