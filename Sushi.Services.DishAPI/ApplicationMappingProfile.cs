@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Sushi.Services.DishAPI.Dtos;
 using Sushi.Services.DishAPI.Models;
+using Sushi.Services.DishAPI.Models.Dtos;
 
 namespace Sushi.Services.DishAPI
 {

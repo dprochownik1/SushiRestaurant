@@ -11,7 +11,7 @@ using Sushi.Services.DishAPI.Models;
 namespace Sushi.Services.DishAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221002134422_initial")]
+    [Migration("20221002162558_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,8 +36,8 @@ namespace Sushi.Services.DishAPI.Migrations
                         .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(80)
