@@ -33,7 +33,8 @@ namespace Sushi.Services.DishAPI.Repository
         {
             try
             {
-                var dish = await GetDishById(dishId);
+                var dish = await _dbContext.Dishes.FirstOrDefaultAsync(d => d.DishId == dishId);
+      
                 if (dish == null)
                 {
                     return false;

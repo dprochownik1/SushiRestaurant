@@ -72,7 +72,7 @@ namespace Sushi.Services.DishAPI.Controllers
         {
             try
             {
-                var dish = await _repository.CreateDish(dto);
+                var dish = await _repository.UpdateDish(dto);
                 _response.Result = dish;
             }
             catch (Exception ex)
@@ -86,11 +86,11 @@ namespace Sushi.Services.DishAPI.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<ResponseDto> Update(int dishId)
+        public async Task<ResponseDto> Delete(int id)
         {
             try
             {
-                var result = await _repository.DeleteDish(dishId);
+                var result = await _repository.DeleteDish(id);
                 _response.Result = result;
             }
             catch (Exception ex)

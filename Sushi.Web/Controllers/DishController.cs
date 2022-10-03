@@ -24,16 +24,62 @@ namespace Sushi.Web.Controllers
             return View(dishes);
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> DishCreate()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(DishDto dishDto)
+        public async Task<IActionResult> DishCreate(DishDto dishDto)
         {
             var response = await _dishService.CreateDishAsync<ResponseDto>(dishDto);
+            if (response != null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(DishIndex));
+            }
+            return View(dishDto);
+        }
+
+        public async Task<IActionResult> DishEdit(int dishId)
+        {
+            var response = await _dishService.GetDishByIdAsync<ResponseDto>(dishId);
+            if (response != null && response.IsSuccess)
+            {
+                var dish = JsonConvert.DeserializeObject<DishDto>(Convert.ToString(response.Result));
+                return View(dish);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DishEdit(DishDto dishDto)
+        {
+            var response = await _dishService.UpdateDishAsync<ResponseDto>(dishDto);
+            if (response != null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(DishIndex));
+            }
+            return View(dishDto);
+        }
+
+        public async Task<IActionResult> DishDelete(int dishId)
+        {
+            var response = await _dishService.GetDishByIdAsync<ResponseDto>(dishId);
+            if (response != null && response.IsSuccess)
+            {
+                var dish = JsonConvert.DeserializeObject<DishDto>(Convert.ToString(response.Result));
+                return View(dish);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DishDelete(DishDto dishDto)
+        {
+            var response = await _dishService.DeleteDishAsync<ResponseDto>(dishDto.DishId);
             if (response != null && response.IsSuccess)
             {
                 return RedirectToAction(nameof(DishIndex));
