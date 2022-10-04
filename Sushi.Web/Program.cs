@@ -11,7 +11,25 @@ builder.Services.AddHttpClient<IDishService, DishService>();
 StaticDetails.DishApiBase = builder.Configuration["ServiceUrls:DishApi"];
 
 builder.Services.AddScoped<IDishService, DishService>();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "Cookies";
+    options.DefaultChallengeScheme = "oidc";
+})
+    .AddCookie("Cookies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
+    .AddOpenIdConnect("oidc", options =>
+    {
+        options.Authority = builder.Configuration["ServiceUrls:IdentityApi"];
+        options.GetClaimsFromUserInfoEndpoint = true;
+        options.ClientId = "sushi";
+        options.ClientSecret = "secret";
+        options.ResponseType = "code";
+        options.TokenValidationParameters.NameClaimType = "name";
+        options.TokenValidationParameters.RoleClaimType = "role";
+        options.Scope.Add("sushi");
+        options.SaveTokens = true;
 
+    });
 
 var app = builder.Build();
 
