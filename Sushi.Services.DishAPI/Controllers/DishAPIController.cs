@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Sushi.Services.DishAPI.Models.Dtos;
 using Sushi.Services.DishAPI.Repository;
 
@@ -17,6 +18,7 @@ namespace Sushi.Services.DishAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ResponseDto> GetAll()
         {
             try
@@ -33,6 +35,7 @@ namespace Sushi.Services.DishAPI.Controllers
             return _response;
         }
         [HttpGet]
+        [Authorize]
         [Route("{id}")]
         public async Task<ResponseDto> GetById(int id)
         {
@@ -51,6 +54,7 @@ namespace Sushi.Services.DishAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ResponseDto> Create([FromBody] DishDto dto)
         {
             try
@@ -68,6 +72,7 @@ namespace Sushi.Services.DishAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ResponseDto> Update([FromBody] DishDto dto)
         {
             try
@@ -85,6 +90,7 @@ namespace Sushi.Services.DishAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles ="Admin")]
         [Route("{id}")]
         public async Task<ResponseDto> Delete(int id)
         {
