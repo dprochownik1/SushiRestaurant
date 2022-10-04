@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Sushi.Services.Identity;
 using Sushi.Services.Identity.DbContexts;
+using Sushi.Services.Identity.Initializer;
 using Sushi.Services.Identity.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,9 +29,14 @@ builder.Services.AddIdentityServer(options =>
 .AddAspNetIdentity<ApplicationUser>()
 .AddDeveloperSigningCredential();
 
-
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
 var app = builder.Build();
+
+var scope = app.Services.CreateScope();
+var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+
+dbInitializer.Initialize();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
