@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Sushi.Services.DishAPI.Models
+namespace Sushi.Services.DishAPI.Models.DbContexts
 {
     public class ApplicationDbContext : DbContext
     {
