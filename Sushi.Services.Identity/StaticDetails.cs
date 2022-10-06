@@ -19,7 +19,7 @@ namespace Sushi.Services.Identity
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>() { new ApiScope("sushi", "Sushi Server") };
 
-        public static IEnumerable<Client> Clients =>
+        public static IEnumerable<Client> Clients => 
             new List<Client>()
             {
                 new Client()
@@ -34,8 +34,8 @@ namespace Sushi.Services.Identity
                     ClientId ="sushi",
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = { "https://localhost:44397/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://localhost:44397/signout-callback-oidc" },
+                    RedirectUris = { "https://localhost:7294/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:7294/signout-callback-oidc" },
                     AllowedScopes = new List<string>()
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
