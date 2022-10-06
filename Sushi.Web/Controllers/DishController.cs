@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Sushi.Web.Models.Dtos;
 using Sushi.Web.Services.Interfaces;
@@ -16,7 +17,9 @@ namespace Sushi.Web.Controllers
         public async Task<IActionResult> DishIndex()
         {
             var dishes = new List<DishDto>();
-            var response = await _dishService.GetAllDishesAsync<ResponseDto>();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var response = await _dishService.GetAllDishesAsync<ResponseDto>(accessToken);
             if (response != null && response.IsSuccess)
             {
                 dishes = JsonConvert.DeserializeObject<List<DishDto>>(Convert.ToString(response.Result));
@@ -33,7 +36,8 @@ namespace Sushi.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DishCreate(DishDto dishDto)
         {
-            var response = await _dishService.CreateDishAsync<ResponseDto>(dishDto);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _dishService.CreateDishAsync<ResponseDto>(dishDto, accessToken);
             if (response != null && response.IsSuccess)
             {
                 return RedirectToAction(nameof(DishIndex));
@@ -43,7 +47,8 @@ namespace Sushi.Web.Controllers
 
         public async Task<IActionResult> DishEdit(int dishId)
         {
-            var response = await _dishService.GetDishByIdAsync<ResponseDto>(dishId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _dishService.GetDishByIdAsync<ResponseDto>(dishId, accessToken);
             if (response != null && response.IsSuccess)
             {
                 var dish = JsonConvert.DeserializeObject<DishDto>(Convert.ToString(response.Result));
@@ -56,7 +61,8 @@ namespace Sushi.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DishEdit(DishDto dishDto)
         {
-            var response = await _dishService.UpdateDishAsync<ResponseDto>(dishDto);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _dishService.UpdateDishAsync<ResponseDto>(dishDto, accessToken);
             if (response != null && response.IsSuccess)
             {
                 return RedirectToAction(nameof(DishIndex));
@@ -66,7 +72,8 @@ namespace Sushi.Web.Controllers
 
         public async Task<IActionResult> DishDelete(int dishId)
         {
-            var response = await _dishService.GetDishByIdAsync<ResponseDto>(dishId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _dishService.GetDishByIdAsync<ResponseDto>(dishId, accessToken);
             if (response != null && response.IsSuccess)
             {
                 var dish = JsonConvert.DeserializeObject<DishDto>(Convert.ToString(response.Result));
@@ -79,7 +86,8 @@ namespace Sushi.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DishDelete(DishDto dishDto)
         {
-            var response = await _dishService.DeleteDishAsync<ResponseDto>(dishDto.DishId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _dishService.DeleteDishAsync<ResponseDto>(dishDto.DishId, accessToken);
             if (response != null && response.IsSuccess)
             {
                 return RedirectToAction(nameof(DishIndex));

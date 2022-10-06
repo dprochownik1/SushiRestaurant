@@ -13,55 +13,55 @@ namespace Sushi.Web.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<T> CreateDishAsync<T>(DishDto dishDto)
+        public async Task<T> CreateDishAsync<T>(DishDto dishDto, string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = ApiType.POST,
                 Data = dishDto,
                 Url =$"{DishApiBase}/api/dishes",
-                AccessToken = string.Empty
+                AccessToken = token
             });
         }
 
-        public async Task<T> DeleteDishAsync<T>(int dishId)
+        public async Task<T> DeleteDishAsync<T>(int dishId, string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = ApiType.DELETE,
                 Url = $"{DishApiBase}/api/dishes/{dishId}",
-                AccessToken = string.Empty
+                AccessToken = token
             });
         }
 
-        public async Task<T> GetAllDishesAsync<T>()
+        public async Task<T> GetAllDishesAsync<T>(string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = ApiType.GET,
                 Url = $"{DishApiBase}/api/dishes",
-                AccessToken = string.Empty
+                AccessToken = token
             });
         }
 
-        public async Task<T> GetDishByIdAsync<T>(int dishId)
+        public async Task<T> GetDishByIdAsync<T>(int dishId, string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = ApiType.GET,
                 Url = $"{DishApiBase}/api/dishes/{dishId}",
-                AccessToken = string.Empty
+                AccessToken = token
             });
         }
 
-        public async Task<T> UpdateDishAsync<T>(DishDto dishDto)
+        public async Task<T> UpdateDishAsync<T>(DishDto dishDto, string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = ApiType.PUT,
                 Data = dishDto,
                 Url = $"{DishApiBase}/api/dishes",
-                AccessToken = string.Empty
+                AccessToken = token
             });
         }
     }

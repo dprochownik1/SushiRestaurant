@@ -34,13 +34,12 @@ namespace Sushi.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Login()
         {
-            var accessToken = await HttpContext.GetTokenAsync("access-token");
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Logout()
         {
-            return SignOut("Cookies", "iodc");
+            return SignOut("Cookies", "oidc");
         }
     }
 }
