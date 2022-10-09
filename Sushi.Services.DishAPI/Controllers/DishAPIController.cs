@@ -18,7 +18,6 @@ namespace Sushi.Services.DishAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ResponseDto> GetAll()
         {
             try
@@ -35,7 +34,6 @@ namespace Sushi.Services.DishAPI.Controllers
             return _response;
         }
         [HttpGet]
-        [Authorize]
         [Route("{id}")]
         public async Task<ResponseDto> GetById(int id)
         {

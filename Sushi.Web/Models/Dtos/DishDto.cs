@@ -4,6 +4,10 @@ namespace Sushi.Web.Models.Dtos
 {
     public class DishDto
     {
+        public DishDto()
+        {
+            Count = 1;
+        }
         [Key]
         public int DishId { get; set; }
         public string Name { get; set; }
@@ -11,5 +15,7 @@ namespace Sushi.Web.Models.Dtos
         public string Description { get; set; }
         public string CategoryName { get; set; }
         public string ImageUrl { get; set; }
+        [Range(1, 100)]
+        public int Count { get; set; }
     }
 }

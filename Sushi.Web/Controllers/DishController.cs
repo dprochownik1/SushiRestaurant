@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Sushi.Web.Models.Dtos;
@@ -70,6 +71,7 @@ namespace Sushi.Web.Controllers
             return View(dishDto);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DishDelete(int dishId)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
@@ -83,6 +85,7 @@ namespace Sushi.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DishDelete(DishDto dishDto)
         {
