@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sushi.Services.DishAPI", "Sushi.Services.DishAPI\Sushi.Services.DishAPI.csproj", "{1EDE0D24-ED16-4C8A-A3C6-FBD96C7F8DF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sushi.Services.Identity", "Sushi.Services.Identity\Sushi.Services.Identity.csproj", "{6D05E7DE-85D9-4BE8-915E-D40C11804C92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sushi.Services.Identity", "Sushi.Services.Identity\Sushi.Services.Identity.csproj", "{6D05E7DE-85D9-4BE8-915E-D40C11804C92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sushi.Services.ShoppingCartAPI", "Sushi.Services.ShoppingCartAPI\Sushi.Services.ShoppingCartAPI.csproj", "{B0DBE8F3-B30C-47E1-8FDD-7A89D9EA3AEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{6D05E7DE-85D9-4BE8-915E-D40C11804C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D05E7DE-85D9-4BE8-915E-D40C11804C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D05E7DE-85D9-4BE8-915E-D40C11804C92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0DBE8F3-B30C-47E1-8FDD-7A89D9EA3AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0DBE8F3-B30C-47E1-8FDD-7A89D9EA3AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0DBE8F3-B30C-47E1-8FDD-7A89D9EA3AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0DBE8F3-B30C-47E1-8FDD-7A89D9EA3AEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{76318D15-CCBE-482B-A402-7E30C466FC6E} = {337C991F-D9BE-4CBC-B36F-31CAB9649F21}
 		{1EDE0D24-ED16-4C8A-A3C6-FBD96C7F8DF9} = {0D3B35C2-A965-4A54-8BE5-FA99BC39C815}
 		{6D05E7DE-85D9-4BE8-915E-D40C11804C92} = {0D3B35C2-A965-4A54-8BE5-FA99BC39C815}
+		{B0DBE8F3-B30C-47E1-8FDD-7A89D9EA3AEF} = {0D3B35C2-A965-4A54-8BE5-FA99BC39C815}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {67696D1B-3D2D-4F35-A27B-D7C2D375B256}
