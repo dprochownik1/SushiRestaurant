@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Sushi.Web;
 using Sushi.Web.Services;
 using Sushi.Web.Services.Interfaces;
@@ -8,9 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient<IDishService, DishService>();
+builder.Services.AddHttpClient<ICartService, CartService>();
 StaticDetails.DishApiBase = builder.Configuration["ServiceUrls:DishApi"];
+StaticDetails.ShoppingCartApiBase = builder.Configuration["ServiceUrls:ShoppingCartApi"];
 
 builder.Services.AddScoped<IDishService, DishService>();
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = "Cookies";
@@ -24,6 +28,8 @@ builder.Services.AddAuthentication(options =>
         options.ClientId = "sushi";
         options.ClientSecret = "secret";
         options.ResponseType = "code";
+        options.ClaimActions.MapJsonKey("role", "role", "role");
+        options.ClaimActions.MapJsonKey("sub", "sub", "sub");
         options.TokenValidationParameters.NameClaimType = "name";
         options.TokenValidationParameters.RoleClaimType = "role";
         options.Scope.Add("sushi");

@@ -13,11 +13,13 @@ namespace Sushi.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IDishService _dishService;
+        private readonly ICartService _cartService;
 
-        public HomeController(ILogger<HomeController> logger, IDishService dishService)
+        public HomeController(ILogger<HomeController> logger, IDishService dishService, ICartService cartService)
         {
             _logger = logger;
             _dishService = dishService;
+            _cartService = cartService;
         }
 
         public async Task<IActionResult> Index()
@@ -43,6 +45,44 @@ namespace Sushi.Web.Controllers
                 dish = JsonConvert.DeserializeObject<DishDto>(Convert.ToString(response.Result));
             }
             return View(dish);
+        }
+
+        [HttpPost]
+        [ActionName("Details")]
+        [Authorize]
+        public async Task<IActionResult> DetailsPost(DishDto dishDto)
+        {
+            var cartDto = new CartDto()
+            {
+                CartHeader = new CartHeaderDto()
+                {
+                    UserId = User.Claims.Where(c => c.Type == "sub")?.FirstOrDefault()?.Value,
+                }
+            };
+            var cartDetails = new CartDetailsDto()
+            {
+                Count = dishDto.Count,
+                DishId = dishDto.DishId
+            };
+
+            var response = await _dishService.GetDishByIdAsync<ResponseDto>(dishDto.DishId, string.Empty);
+            if (response != null && response.IsSuccess)
+            {
+                cartDetails.Dish = JsonConvert.DeserializeObject<DishDto>(Convert.ToString(response.Result));
+            }
+            var cartDetailsDtos = new List<CartDetailsDto>();
+            cartDetailsDtos.Add(cartDetails);
+            cartDto.CartDetails = cartDetailsDtos;
+
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var addToCartResponse = await _cartService.AddToCartAsync<ResponseDto>(cartDto, accessToken);
+
+            if (addToCartResponse != null && addToCartResponse.IsSuccess)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(dishDto);
         }
 
         public IActionResult Privacy()
