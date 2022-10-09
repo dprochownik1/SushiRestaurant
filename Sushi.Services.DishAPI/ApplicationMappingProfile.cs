@@ -10,8 +10,7 @@ namespace Sushi.Services.DishAPI
         {
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<DishDto, Dish>();
-                cfg.CreateMap<Dish, DishDto>();
+                cfg.CreateMap<DishDto, Dish>().ReverseMap();
             });
             return mapperConfiguration;
         }
