@@ -40,7 +40,7 @@ namespace Sushi.Services.ShoppingCartAPI.Controllers
         {
             try
             {
-                _responseDto.Result = await _cartRepository.CreateCart(cartDto);
+                _responseDto.Result = await _cartRepository.CreateUpdateCart(cartDto);
             }
             catch (Exception ex)
             {
@@ -57,7 +57,7 @@ namespace Sushi.Services.ShoppingCartAPI.Controllers
         {
             try
             {
-                _responseDto.Result = await _cartRepository.UpdateCart(cartDto);
+                _responseDto.Result = await _cartRepository.CreateUpdateCart(cartDto);
             }
             catch (Exception ex)
             {
@@ -74,7 +74,8 @@ namespace Sushi.Services.ShoppingCartAPI.Controllers
         {
             try
             {
-                _responseDto.Result = await _cartRepository.DeleteCart(cardId);
+                var result = await _cartRepository.DeleteCart(cardId);
+                _responseDto.Result = result;
             }
             catch (Exception ex)
             {
