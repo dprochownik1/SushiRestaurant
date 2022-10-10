@@ -23,6 +23,21 @@ namespace Sushi.Web.Controllers
             return View(await LoadCartDtoBasedOnLoggedUser());
         }
 
+        public async Task<IActionResult> Delete(int cartDetailsId)
+        {
+            var userId = User.Claims.Where(c => c.Type == "sub")?.FirstOrDefault()?.Value;
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _cartService.DeleteFromCartAsync<ResponseDto>(cartDetailsId, accessToken);
+
+            var cartDto = new CartDto();
+            if (response != null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+           
+        }
+
 
         private async Task<CartDto> LoadCartDtoBasedOnLoggedUser()
         {

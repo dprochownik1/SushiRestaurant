@@ -31,7 +31,7 @@ namespace Sushi.Web.Services
             {
                 ApiType = ApiType.POST,
                 Data = cartId,
-                Url = $"{ShoppingCartApiBase}/api/cart/RemoveCart",
+                Url = $"{ShoppingCartApiBase}/api/cart/DeleteCart",
                 AccessToken = token
             });
         }
