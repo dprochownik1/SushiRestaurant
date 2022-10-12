@@ -33,6 +33,8 @@ namespace Sushi.Services.DishAPI.Controllers
             }
             return _response;
         }
+
+        [Authorize]
         [HttpGet]
         [Route("{id}")]
         public async Task<ResponseDto> GetById(int id)
@@ -51,8 +53,8 @@ namespace Sushi.Services.DishAPI.Controllers
             return _response;
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpPost]
-        [Authorize]
         public async Task<ResponseDto> Create([FromBody] DishDto dto)
         {
             try
@@ -69,8 +71,8 @@ namespace Sushi.Services.DishAPI.Controllers
             return _response;
         }
 
-        [HttpPut]
         [Authorize]
+        [HttpPut]
         public async Task<ResponseDto> Update([FromBody] DishDto dto)
         {
             try

@@ -15,6 +15,7 @@ namespace Sushi.Web.Controllers
         {
             _dishService = dishService;
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DishIndex()
         {
             var dishes = new List<DishDto>();
@@ -28,12 +29,15 @@ namespace Sushi.Web.Controllers
             return View(dishes);
         }
 
-        public async Task<IActionResult> DishCreate()
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult DishCreate()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DishCreate(DishDto dishDto)
         {
@@ -59,6 +63,7 @@ namespace Sushi.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DishEdit(DishDto dishDto)
         {
