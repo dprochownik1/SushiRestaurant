@@ -113,9 +113,8 @@ namespace Sushi.Services.ShoppingCartAPI.Repository
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
-
                 return false;
             }
             
