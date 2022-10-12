@@ -22,6 +22,7 @@ namespace Sushi.Web.Controllers
             _cartService = cartService;
         }
 
+        
         public async Task<IActionResult> Index()
         {
             var dishes = new List<DishDto>();
@@ -34,7 +35,7 @@ namespace Sushi.Web.Controllers
             return View(dishes);
         }
 
-        [Authorize]
+
         public async Task<IActionResult> Details(int dishId)
         {
             var dish = new DishDto();

@@ -50,6 +50,7 @@ namespace Sushi.Web.Controllers
             return View(dishDto);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DishEdit(int dishId)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
