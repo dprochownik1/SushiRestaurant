@@ -230,6 +230,10 @@ namespace IdentityServerHost.Quickstart.UI
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            List<string> roles = new List<string>();
+            roles.Add("Admin");
+            roles.Add("Customer");
+            ViewBag.message = roles;
             if (ModelState.IsValid)
             {
 
